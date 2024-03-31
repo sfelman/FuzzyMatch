@@ -13,3 +13,5 @@ Order of SQL
 
 BK-Tree insert computes in O(N) time - took ~2 hours for the 172k dictionary
 BK-Tree search computes in O(log N) time
+
+To Remove a word from the tree, run: UPDATE BK_Tree SET active = 0 WHERE word = 'word'
