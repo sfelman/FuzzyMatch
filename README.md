@@ -17,3 +17,9 @@ BK-Tree insert computes in O(N) time - took ~2 hours for the 172k dictionary.
 BK-Tree search computes in O(log N) time
 
 To Remove a word from the tree, run: UPDATE BK_Tree SET active = 0 WHERE word = 'word'
+
+Some example outputs of P_BK_Tree_Search on the Scrabble Words Dictionary of words and the runtimes:
+![image](https://github.com/sfelman/FuzzyMatch/assets/7735212/07119d83-70b6-4f18-83e2-90f5118b5ec7)
+![image](https://github.com/sfelman/FuzzyMatch/assets/7735212/7b9decc8-daa8-404f-be28-56e327fcbce6)
+![image](https://github.com/sfelman/FuzzyMatch/assets/7735212/a0a77d45-018e-4ce4-9cb0-af50581d8ef3)
+![image](https://github.com/sfelman/FuzzyMatch/assets/7735212/8af71cef-6b94-4720-b56e-8bafad059de6)
