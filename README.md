@@ -5,7 +5,7 @@ Use a dictionary of words or other strings that you would like to fuzzy match.
 
 For this example I used https://github.com/zeisler/scrabble/blob/master/db/dictionary.csv
 
-Order of SQL 
+Order of SQL for Setup:
 1) F_Levenshtein.sql - altered version of https://blog.softwx.net/2014/12/optimizing-levenshtein-algorithm-in-tsql.html
 2) BK_Tree.sql
 3) P_BK_Tree_Insert.sql
