@@ -12,7 +12,10 @@ Order of SQL for Setup:
 4) BK_Tree_Triggers.sql
 5) P_BK_Tree_Search.sql
 
-Note: To initialize the tree, you can run a normal insert call(the insert trigger will take care of the P_BK_Tree_Insert calls).
+To initialize the tree, you can run a normal insert call(the insert trigger will take care of the P_BK_Tree_Insert calls) such as:
+
+insert into BK_Tree (word)
+select word from Dictionary
 
 BK-Tree insert computes in O(N) time - took ~2 hours for the 172k dictionary.
 
