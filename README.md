@@ -5,12 +5,17 @@ Use a dictionary of words or other strings that you would like to fuzzy match.
 
 For this example I used https://github.com/zeisler/scrabble/blob/master/db/dictionary.csv
 
-Order of SQL 
+Order of SQL for Setup:
 1) F_Levenshtein.sql - altered version of https://blog.softwx.net/2014/12/optimizing-levenshtein-algorithm-in-tsql.html
 2) BK_Tree.sql
 3) P_BK_Tree_Insert.sql
-4) P_BK_Tree_Search.sql
-5) Run something similar to Insert_Example.sql to initialize the tree. Note: each insert will need to be run 1 at a time.
+4) BK_Tree_Triggers.sql
+5) P_BK_Tree_Search.sql
+
+To initialize the tree, you can run a normal insert call(the insert trigger will take care of the P_BK_Tree_Insert calls) such as:
+
+insert into BK_Tree (word)
+select word from Dictionary
 
 BK-Tree insert computes in O(N) time - took ~2 hours for the 172k dictionary.
 
