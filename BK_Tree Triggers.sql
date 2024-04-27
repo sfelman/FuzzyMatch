@@ -57,7 +57,7 @@ ON dbo.BK_Tree
 INSTEAD OF DELETE 
 AS
 BEGIN
-	RAISERROR ('Cannot Delete - Will destroy structure of BK_Tree. Updating Active Flag to 0 insted.',-1,-1,'BK_Tree')
+	RAISERROR ('Cannot Delete - Will destroy structure of BK_Tree. Updating Active Flag to 0 instead.',-1,-1,'BK_Tree')
 	UPDATE BK_Tree set active = 0 WHERE word in (select word from deleted)
 	RETURN
 END;
