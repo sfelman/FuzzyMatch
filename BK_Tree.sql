@@ -1,6 +1,6 @@
 USE [Sandbox]
 GO
-drop table BK_TREE
+	
 CREATE TABLE dbo.BK_Tree(
 	id int IDENTITY(1,1) NOT NULL CONSTRAINT [PK_BK_Tree_id] PRIMARY KEY CLUSTERED,
 	word varchar(50) NOT NULL CONSTRAINT [UQ_BK_Tree_word] UNIQUE,
