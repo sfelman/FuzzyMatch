@@ -2,7 +2,7 @@
 Fuzzy Matching Code in T-SQL
 
 The BK-Tree data structure, created in 1973 by W.A.Burkhard and R.M.Keller(hence the name BK), is useful for finding similar words to a dictionary of words, without having to compare with every word in the dictionary.
-This project is a t-sql implementation of that data structure, which includes an insert algorithm that creates the BK-tree structure in T-SQL and a search algorithm that parses the tree to find similar words.
+This project is a t-sql implementation of that data structure, which includes an insert algorithm that creates the BK-tree structure in T-SQL using adjacency list for the table structure storage and a search algorithm that parses the tree to find similar words.
 
 For more information regarding the BK-tree data structure, see: https://dl.acm.org/doi/10.1145/362003.362025
 
