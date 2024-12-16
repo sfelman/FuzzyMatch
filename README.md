@@ -1,5 +1,5 @@
 # FuzzyMatch
-The inspiration for this work was that SSIS jobs that use fuzzy matching cannot be setup to run through SQL Server jobs unless you are paying for the enterprise edition of SQL Server. Thus, I set out to create a quick fuzzy match/lookup structure within SQL Server.
+The inspiration for this work is that SSIS jobs that use fuzzy matching cannot be setup to run through SQL Server jobs unless you are paying for the enterprise edition of SQL Server. Thus, I set out to create a quick fuzzy match/lookup structure within SQL Server.
 
 The BK-Tree data structure, created in 1973 by W.A.Burkhard and R.M.Keller(hence the name BK), is useful for finding similar words to a dictionary of words, without having to compare with every word in the dictionary.
 
