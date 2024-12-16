@@ -13,50 +13,22 @@ CREATE PROCEDURE [dbo].[P_BK_Tree_Search]
 AS
 BEGIN
 
-	IF OBJECT_ID('tempdb..#Matches') IS NOT NULL
-		TRUNCATE TABLE #Matches
-	ELSE
-		CREATE TABLE #Matches (
-			id int,
-			word varchar(50),
-			similarity tinyint
-		)
-
-	IF OBJECT_ID('tempdb..#Candidate_Nodes') IS NOT NULL
-		Truncate TABLE #Candidate_Nodes
-	ELSE
-	CREATE TABLE #Candidate_Nodes(
-		id int not null PRIMARY KEY,
-		word varchar(50) not null,
-		search_flag bit not null,
-		active bit not null
+	;with q as (
+		select id, word, active
+		from BK_Tree 
+		where id = 1
+		union all
+		select b.id, b.word, b.active
+		from q
+		join BK_Tree b on q.id = b.parent_node_id
+		where b.levenshtein_distance >= dbo.F_Levenshtein(q.word, @search_word) - @tolerance
+		and b.levenshtein_distance <= dbo.F_Levenshtein(q.word, @search_word) + @tolerance
 	)
-	insert into #Candidate_Nodes 
-	select id, word, 1, active
-	from BK_Tree 
-	where parent_node_id is null
+	select id, word, 1 - (dbo.F_Levenshtein(word,@search_word)*1.0)/(GREATEST(len(word),len(@search_word))*1.0) [similarity_percent]
+	from q 
+	where dbo.F_Levenshtein(word, @search_word) <= @tolerance
+	and active = 1
+	order by 1 - (dbo.F_Levenshtein(word,@search_word)*1.0)/(GREATEST(len(word),len(@search_word))*1.0) desc
 
-	while(exists (select 1 from #Candidate_Nodes where search_flag = 1))
-	BEGIN
-		update #Candidate_Nodes set search_flag = 0
-		insert into #Matches (id,word,similarity) 
-		select id
-			   ,word
-			   ,100 - (((dbo.F_Levenshtein(word,@search_word)*1.0)/(GREATEST(len(word),len(@search_word))*1.0))*100)
-		from #Candidate_Nodes 
-		where dbo.F_Levenshtein(word, @search_word) <= @tolerance
-		and active = 1
-		
-		insert into #Candidate_Nodes
-		select b.id, b.word, 1, b.active
-		from BK_Tree b
-		cross apply #Candidate_Nodes c
-		where b.parent_node_id = c.id
-		and levenshtein_distance >= dbo.F_Levenshtein(c.word, @search_word) - @tolerance
-		and levenshtein_distance <= dbo.F_Levenshtein(c.word, @search_word) + @tolerance
-		
-		delete #Candidate_Nodes where search_flag = 0
-	END
-	select id, word, similarity/100.0 [similarity_percent] from #Matches order by similarity desc
 END
 GO
