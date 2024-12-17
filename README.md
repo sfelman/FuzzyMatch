@@ -36,5 +36,6 @@ Some example outputs of P_BK_Tree_Search on the Scrabble Words Dictionary of wor
 
 
 One last note: To remove a word from the tree, run: UPDATE BK_Tree SET active = 0 WHERE word = 'word'
+Trying to delete a row entirely from the table which is akin to deleting a node from the tree will cause the structure of the tree to be ruined as all child nodes of that node will no longer be reachable by the search function.
 
 
